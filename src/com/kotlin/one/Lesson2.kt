@@ -1,119 +1,185 @@
 package com.android.com.kotlin.one
 
 fun greet(name: String = "Student"): String {
-    TODO("Write a function that greets someone by name.")
+    //TODO("Write a function that greets someone by name.")
+    return name
 }
 
 fun printInfo(name: String, age: Int = 18, city: String = "Paris") {
-    TODO("Print user info, with some default values. In the format: $name is $age years old and lives in $city.")
+   //TODO("Print user info, with some default values. In the format: $name is $age years old and lives in $city.")
+    println("$name is $age years old and lives in $city")
 }
 
 fun add(a: Int, b: Int): Int {
-    TODO("Function that adds two numbers and returns the result.")
+    //TODO("Function that adds two numbers and returns the result.")
+  return  a + b
 }
 
 fun isEven(number: Int): Boolean {
-    TODO("Check if a number is even.")
+    //TODO("Check if a number is even.")
+    return number % 2 ==0
 }
 
 fun areaOfCircle(radius: Double): Double {
-    TODO(
-        "Compute area of a circle using π * r²."
-    )
+    //TODO( "Compute area of a circle using π * r².")
+    val pi = 3.14
+    return pi * radius * radius
 }
 
 // TODO 5: Return a letter grade based on score.
 fun grade(score: Int): String {
-    TODO(
-        "Return a letter grade based on score. \uD83D\uDD27 Use if or when" +
-                "- Score >= 90: 'A'\n" +
-                "- Score >= 80: 'B'\n" +
-                "- Score >= 70: 'C'\n" +
-                "- Score >= 60: 'D'\n" +
-                "- Below 60: 'F'"
-    )
+//    TODO(
+//        "Return a letter grade based on score. \uD83D\uDD27 Use if or when" +
+//                "- Score >= 90: 'A'\n" +
+//                "- Score >= 80: 'B'\n" +
+//                "- Score >= 70: 'C'\n" +
+//                "- Score >= 60: 'D'\n" +
+//                "- Below 60: 'F'"
+//    )
+    return when {
+        score >= 90 -> "A"
+        score >= 80 -> "B"
+        score >= 70 -> "C"
+        score >= 60 -> "D"
+        else -> "F"
+    }
 }
 
 fun maxOfThree(a: Int, b: Int, c: Int): Int {
-    TODO(
-        "Return the maximum of three numbers."
-    )
+    //TODO("Return the maximum of three numbers.")
+    return maxOf(a, maxOf(b, c))
 }
 
 fun toFahrenheit(celsius: Double): Double {
-    TODO("Convert Celsius to Fahrenheit.")
+    //TODO("Convert Celsius to Fahrenheit.")
+    return (celsius * 9.0 / 5.0) + 32.0
 }
 
 
 fun applyDiscount(price: Double, discount: Double = 0.1): Double {
-    TODO(
-        "Apply a discount (default 10%) to a price."
-    )
+    //TODO("Apply a discount (default 10%) to a price.")
+    return price * (1.0 - discount)
 }
 
 
 fun capitalizeWords(sentence: String): String {
-    TODO(
-        "Capitalize the first letter of each word in a sentence."
-    )
+    //TODO("Capitalize the first letter of each word in a sentence.")
+    return sentence
+        .trim()
+        .split(Regex("\\s+"))
+        .filter { it.isNotBlank() }
+        .joinToString(" ") { word ->
+            word.lowercase().replaceFirstChar { ch ->
+                if (ch.isLowerCase()) ch.titlecase() else ch.toString()
+            }
+        }
 }
 
 fun bmi(weight: Double, height: Double): Double {
-    TODO(
-        "Compute BMI using the formula: weight / height²"
-    )
+    //TODO("Compute BMI using the formula: weight / height²")
+    return weight / (height * height)
 }
 
 fun passwordStrength(password: String): Boolean {
-    TODO(
-        "Check password strength:\n" +
-                "- At least 8 characters\n" +
-                "- Contains uppercase letter\n" +
-                "- Contains lowercase letter\n" +
-                "- Contains a number"
-    )
+//    TODO(
+//        "Check password strength:\n" +
+//                "- At least 8 characters\n" +
+//                "- Contains uppercase letter\n" +
+//                "- Contains lowercase letter\n" +
+//                "- Contains a number"
+//    )
+    if (password.length < 8) return false
+    val hasUpper = password.any { it.isUpperCase() }
+    val hasLower = password.any { it.isLowerCase() }
+    val hasDigit = password.any { it.isDigit() }
+    return hasUpper && hasLower && hasDigit
 }
 
 fun filterEvenNumbers(numbers: List<Int>): List<Int> {
-    TODO(
-        "Return a list of even numbers from the input list."
-    )
+    //TODO("Return a list of even numbers from the input list.")
+    return numbers.filter { it % 2 == 0 }
 }
 
 
 fun factorial(n: Int): Int {
-    TODO(
-        "Compute the factorial of a number n recursively."
-    )
+    //TODO("Compute the factorial of a number n recursively.")
+    require(n >= 0) { "n must be >= 0" }
+    return if (n <= 1) 1 else n * factorial(n - 1)
 }
 
 fun fibonacci(n: Int): Int {
-    TODO(
-        "Return the nth Fibonacci number using recursion."
-    )
+    //TODO("Return the nth Fibonacci number using recursion.")
+    require(n >= 0) { "n must be >= 0" }
+    return when (n) {
+        0 -> 0
+        1 -> 1
+        else -> fibonacci(n - 1) + fibonacci(n - 2)
+    }
 }
 
 
 // TODO 19: Simple calculator using when expression.
 fun miniCalculator() {
-    TODO(
-        "Create a simple calculator that takes two numbers and an operator (+, -, *, /) from the user and prints the result."
-    )
+    //TODO("Create a simple calculator that takes two numbers and an operator (+, -, *, /) from the user and prints the result.")
+
     /*
     Example
     println("Enter first number:")
     val a = readln().toDouble()
      */
+    print("Enter first number: ")
+    val a = readln().toDouble()
+
+    print("Enter operator (+, -, *, /): ")
+    val op = readln().trim()
+
+    print("Enter second number: ")
+    val b = readln().toDouble()
+
+    val result = when (op) {
+        "+" -> a + b
+        "-" -> a - b
+        "*" -> a * b
+        "/" -> {
+            if (b == 0.0) {
+                println("Cannot divide by zero.")
+                return
+            } else a / b
+        }
+        else -> {
+            println("Invalid operator.")
+            return
+        }
+    }
+
+    println("Result: $result")
 }
 
 // TODO 20: Text analyzer.
 fun analyzeText(text: String): Map<String, Any> {
-    TODO(
-        "Analyze the text and return statistics:\n" +
-                "- Character count\n" +
-                "- Word count\n" +
-                "- Longest word\n" +
-                "- Average word length"
+//    TODO(
+//        "Analyze the text and return statistics:\n" +
+//                "- Character count\n" +
+//                "- Word count\n" +
+//                "- Longest word\n" +
+//                "- Average word length"
+//    )
+    val charCount = text.length
+
+    val words = text
+        .trim()
+        .split(Regex("\\s+"))
+        .filter { it.isNotBlank() }
+
+    val wordCount = words.size
+    val longestWord = words.maxByOrNull { it.length } ?: ""
+    val averageWordLength = if (wordCount == 0) 0.0 else words.sumOf { it.length }.toDouble() / wordCount
+
+    return mapOf(
+        "charCount" to charCount,
+        "wordCount" to wordCount,
+        "longestWord" to longestWord,
+        "averageWordLength" to averageWordLength
     )
 }
 
