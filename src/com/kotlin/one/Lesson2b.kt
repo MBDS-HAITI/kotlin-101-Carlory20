@@ -53,9 +53,9 @@ fun ex7(): List<Long> {
     val start = System.currentTimeMillis()
 
     val result = (1..1_000_000)
-        .toList() // eager: materialize
+        .toList()
         .filter { it % 3 == 0 }
-        .map { it.toLong() * it.toLong() } // squares as Long
+        .map { it.toLong() * it.toLong() }
         .take(5)
 
     val end = System.currentTimeMillis()
@@ -91,7 +91,7 @@ fun ex9(names: List<String>): List<String> {
 
 // Quick test runner
 fun main() {
-    println("🔍 Running Lesson2 List Exercises...\n")
+    println(" Running Lesson2 List Exercises...\n")
 
     runtest("ex1 returns 5 ints") { ex1().size == 5 && ex1() == listOf(1,2,3,4,5) }
     runtest("ex2 adds 4th element") { ex2().size == 4 && ex2().contains("Python") }
